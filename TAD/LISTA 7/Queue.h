@@ -56,3 +56,22 @@ char *head(Queue *q) {
     }
     return q->inicio->info;
 }
+
+void cancel(Queue *q, char valor[100]){
+    QueueNode *aux1 = q->inicio;
+    if(strcmp(*aux1->info, valor) == 0){
+        q->inicio = q->inicio->prox;
+    }
+    else{
+        while(aux1 != NULL && strcmp(aux1->info, valor) != 0){
+            aux1 = aux1->prox;
+        }
+        if(strcmp(aux1->info,valor) == 0){
+            aux1 = &aux1->info;
+            q->inicio->prox = aux1;
+                   
+        }
+    }
+
+
+}
