@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Queue.h"
+#define TAM 100
 void exibirOpcoes () {
     printf ("Opcoes \n");
     printf ("1 - Empilhar \n");
@@ -13,7 +14,7 @@ void exibirOpcoes () {
 
 int main () {
     Queue fila;
-    char *c = (char*) malloc(sizeof(char));
+    char c[TAM];
     int op = -1;
 
     inicializar(&fila);
@@ -24,23 +25,24 @@ int main () {
         switch (op) {
             case 1:
                 printf ("Informe o valor a ser empilhado: ");
-                fgets(c, sizeof(c), stdin);
+                fgets(c, TAM, stdin);
+                printf("\n");
                 Enqueue (&fila,c);
                 break;
             case 2: if (isEmpty (&fila) == 1) {
                         printf ("Stack empty! \n");
                     }
                     else {
-                        *c = Dequeue (&fila);
-                        printf ("Valor desempilhado: %c\n", *c);
+                        strcpy(c,Dequeue (&fila));
+                        printf ("Valor desempilhado: %s\n", c);
                     }
                     break;
             case 3: if (isEmpty (&fila) == 1) {
                         printf ("Stack empty! \n");
                     }
                     else {
-                        *c = head (&fila);
-                        printf ("Valor no topo da pilha: %c \n", *c);
+                        strcpy(c,head(&fila));
+                        printf ("Valor no topo da pilha: %s \n", c);
                     }
                     break;
             case 0: printf ("Bye bye\n");

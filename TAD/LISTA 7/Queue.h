@@ -23,7 +23,7 @@ int isEmpty(Queue *q) {
 
 void Enqueue(Queue *q, char valor[100]) {
     QueueNode *novo = malloc(sizeof(QueueNode));
-    novo->info = valor;
+    strcpy(novo->info, valor);
     novo->prox = NULL;
     if (isEmpty(q)) {
         q->inicio = novo;
@@ -33,13 +33,13 @@ void Enqueue(Queue *q, char valor[100]) {
     q->fim = novo;
 }
 
-int Dequeue(Queue *q) {
+char *Dequeue(Queue *q) {
     if (isEmpty(q)) {
         printf("Fila vazia. Nao eh possivel desenfileirar.\n");
         exit(1);
     }
     QueueNode *aux = q->inicio;
-    char *valor = (char*)malloc(sizeof(char));
+    char *valor = (char*)malloc(sizeof(char)*100);
     q->inicio = aux->prox;
     if (q->inicio == NULL) {
         q->fim = NULL;
@@ -49,7 +49,7 @@ int Dequeue(Queue *q) {
     return valor;
 }
 
-int head(Queue *q) {
+char *head(Queue *q) {
     if (isEmpty(q)) {
         printf("Fila vazia. Nenhum elemento.\n");
         exit(1);
