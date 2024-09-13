@@ -57,21 +57,28 @@ char *head(Queue *q) {
     return q->inicio->info;
 }
 
-void cancel(Queue *q, char valor[100]){
-    QueueNode *aux;
-    if(strcmp(*aux->info, valor) == 0){
-        q->inicio = q->inicio->prox;
+void cancel(Queue *f, char valor[100]){
+    QueueNode *atual, *anterior;
+    if(isEmpty(&f)==1){
+        printf("FILA VAZIA. \n");
     }
-    else{
-        while(aux != NULL && strcmp(aux->info, valor) != 0){
-            aux = aux->prox;
+    else if(f->inicio = f->fim){//tem um nó
+        if(strcmp(f->inicio->info, valor)==0){
+            free(f->inicio);
+            f->inicio = NULL;
+            f->fim = NULL;
+        }else{
+            printf("Valor não encontrado! \n");
         }
-        if(strcmp(aux->info,valor) == 0){
-            aux = &aux->info;
-            q->inicio->prox = aux;
-                   
+    }else{//mais de um nó
+        if(strcmp(f->inicio->info, valor)==0){ //remoção do inicio
+            atual = f->inicio;
+            f->inicio = f->inicio->prox; //ou f->inicio = aux->prox
+            free(atual);
+            printf("Cancelamento efetuado!");
         }
     }
+
 }
 
 void list(Queue f){
@@ -84,6 +91,7 @@ void list(Queue f){
         while(aux != NULL){
             printf("%s \n", aux->info);
             aux = aux->prox;
+            //aux pega o endereço do aux->prox, ou seja, ele não vai mudar o valor, ele vai ver o que está naquele endereço meu lindo.
         }
     }
 }
