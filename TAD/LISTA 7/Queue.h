@@ -76,6 +76,17 @@ void cancel(Queue *f, char valor[100]){
             f->inicio = f->inicio->prox; //ou f->inicio = aux->prox
             free(atual);
             printf("Cancelamento efetuado!");
+        }else{
+            atual = f->inicio->prox;
+            anterior = f->inicio;
+            while(){
+                if(strcmp(atual->info, valor)==0){//achei
+
+                }else{
+                    anterior = atual;
+                    atual = atual->prox;
+                }
+            }
         }
     }
 
