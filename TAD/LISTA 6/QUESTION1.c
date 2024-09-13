@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "Queue4.h"
+#include "QUESTION2.h"
 #define TAM 20
 
 int main(){
