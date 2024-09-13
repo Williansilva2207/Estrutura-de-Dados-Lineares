@@ -58,20 +58,32 @@ char *head(Queue *q) {
 }
 
 void cancel(Queue *q, char valor[100]){
-    QueueNode *aux1 = q->inicio;
-    if(strcmp(*aux1->info, valor) == 0){
+    QueueNode *aux;
+    if(strcmp(*aux->info, valor) == 0){
         q->inicio = q->inicio->prox;
     }
     else{
-        while(aux1 != NULL && strcmp(aux1->info, valor) != 0){
-            aux1 = aux1->prox;
+        while(aux != NULL && strcmp(aux->info, valor) != 0){
+            aux = aux->prox;
         }
-        if(strcmp(aux1->info,valor) == 0){
-            aux1 = &aux1->info;
-            q->inicio->prox = aux1;
+        if(strcmp(aux->info,valor) == 0){
+            aux = &aux->info;
+            q->inicio->prox = aux;
                    
         }
     }
+}
 
-
+void list(Queue f){
+    QueueNode* aux;
+    if(isEmpty(&f)==1){
+        printf("Fila vazia!\n");
+    }
+    else{
+        aux = f.inicio;
+        while(aux != NULL){
+            printf("%s \n", aux->info);
+            aux = aux->prox;
+        }
+    }
 }
