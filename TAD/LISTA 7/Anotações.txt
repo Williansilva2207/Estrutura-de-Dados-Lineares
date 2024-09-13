@@ -1,1 +1,8 @@
 NULL = endereço 0 da memória
+
+LIST 7 QUESTION 1 (LIST):
+
+* Usando for:
+    for(aux = fila.inicio; aux != NULL; aux = aux->prox){
+        printf("%s\n", aux->info);
+    }
