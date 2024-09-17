@@ -93,6 +93,7 @@ void cancel(Queue *f, char valor[100]){
                     atual = atual->prox;
                 }
             }
+            printf("Arquivo não encontrado! \n");
         }
     }
 
