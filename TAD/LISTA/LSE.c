@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 typedef struct listNode {
     int info;
     struct listNode *prox;
@@ -11,5 +13,7 @@ typedef struct lse{
 }LSE;
 
 void inicializar(LSE *l){
-
+    l->inicio = NULL;
+    l->fim = NULL;
+    l->qtd = 0;
 }
