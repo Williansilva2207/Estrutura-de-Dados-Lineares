@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#define TRUE 1
+#define FALSE 0
 
 typedef struct listNode {
     int info;
@@ -18,15 +20,19 @@ void inicializar(LSE *l){
     l->qtd = 0;
 }
 
-int isEmpty( LSE *l){
-    return l->inicio == NULL;
+int isEmpty( LSE l){
+    if(l.qtd == 0){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
 }
 
 void inserirFinal(LSE *l,int valor){
-    ListNode *novo = malloc(sizeof(ListNode));
+    ListNode *novo =(ListNode*) malloc(sizeof(ListNode));
     novo->info = valor;
     novo->prox = NULL;
-    if (isEmpty(l)) {
+    if (isEmpty(*l)== TRUE) {
         l->inicio = novo;
     } else {
         l->fim->prox = novo;
@@ -39,19 +45,21 @@ void inserirInicio(LSE *l, int valor){
     ListNode *novo = malloc(sizeof(ListNode));
     novo->info = valor;
     novo->prox = NULL;
-    if(isEmpty(l)){
-        l = novo;
+    if(isEmpty(*l)==TRUE){
+        l->inicio = novo;
+        l->fim = novo;
     }else{
-        novo->prox = l;
-        l = novo;
+        novo->prox = l->inicio;
+        l->inicio = novo;
 
     }
+    l->qtd++;
 }
 
 void removerInicio(LSE *l){
     ListNode* aux = l;
     int valor;
-    l = l->inicio->prox;
+    l->inicio = l->inicio->prox;
     valor = aux->info;
     free(aux);
     l->qtd--;
@@ -68,6 +76,7 @@ void removerUltimo(LSE *l){
     l->inicio = aux->prox;
     if (l->inicio == NULL) {
         l->fim = NULL;
+        l->inicio = NULL;
     }
     valor = aux->info;
     free(aux);
