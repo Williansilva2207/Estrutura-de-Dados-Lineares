@@ -57,31 +57,41 @@ void inserirInicio(LSE *l, int valor){
 }
 
 void removerInicio(LSE *l){
-    ListNode* aux = l;
-    int valor;
-    l->inicio = l->inicio->prox;
-    valor = aux->info;
-    free(aux);
-    l->qtd--;
-    return valor;
+    if(isEmpty(*l) == TRUE){
+        return;
+    }else{
+        ListNode* aux = l->inicio;
+        
+        l->inicio = l->inicio->prox;
+        
+        free(aux);
+        l->qtd--;
+        if(l->inicio == NULL){
+            l->fim = NULL;
+        }
+        free(aux);
+    }
 }
 
 void removerUltimo(LSE *l){
     if (isEmpty(*l)) {
-        printf("Fila vazia. Nao eh possivel desenfileirar.\n");
-        exit(1);
+        if(l->inicio->prox == NULL){
+            free(l->inicio);
+            l->fim = NULL;
+            l->inicio = NULL;
+        }
+    }else{
+
+        ListNode *aux = l->inicio;
+        while(aux->prox != l->fim){
+            aux = aux->prox;
+        }
+        
+        l->fim = aux->prox;
+        free(aux);
+        aux->prox= NULL;
     }
-    ListNode *aux = l->inicio;
-    int *valor = (int*)malloc(sizeof(int)*100);
-    l->inicio = aux->prox;
-    if (l->inicio == NULL) {
-        l->fim = NULL;
-        l->inicio = NULL;
-    }
-    valor = aux->info;
-    free(aux);
-    l->qtd --;
-    return valor;
+   l->qtd --;
 }
 
 void list(LSE l){
