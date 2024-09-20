@@ -34,19 +34,7 @@ void Enqueue(Queue *q, char valor[100]) {
 }
 
 char *Dequeue(Queue *q) {
-    if (isEmpty(q)) {
-        printf("Fila vazia. Nao eh possivel desenfileirar.\n");
-        exit(1);
-    }
-    QueueNode *aux = q->inicio;
-    char *valor = (char*)malloc(sizeof(char)*100);
-    q->inicio = aux->prox;
-    if (q->inicio == NULL) {
-        q->fim = NULL;
-    }
-    strcpy(valor, aux->info);
-    free(aux);
-    return valor;
+c
 }
 
 char *head(Queue *q) {
