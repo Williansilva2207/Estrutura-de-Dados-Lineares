@@ -79,19 +79,21 @@ void removerUltimo(LSE *l){
             free(l->inicio);
             l->fim = NULL;
             l->inicio = NULL;
-        }
-    }else{
+        }else{
 
-        ListNode *aux = l->inicio;
-        while(aux->prox != l->fim){
-            aux = aux->prox;
+            ListNode *aux = l->inicio;
+            while(aux->prox != l->fim){
+                aux = aux->prox;
+            }
+            
+            l->fim = aux->prox;
+            free(aux);
+            aux->prox= NULL;
         }
-        
-        l->fim = aux->prox;
-        free(aux);
-        aux->prox= NULL;
+        l->qtd --;
+    }else{
+        printf("Lista vazia\n");
     }
-   l->qtd --;
 }
 
 void list(LSE l){
