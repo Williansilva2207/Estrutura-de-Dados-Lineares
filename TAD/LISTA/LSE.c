@@ -48,12 +48,20 @@ void inserirInicio(LSE *l, int valor){
     if(isEmpty(*l)==TRUE){
         l->inicio = novo;
         l->fim = novo;
+        l->qtd++;
     }else{
-        novo->prox = l->inicio;
-        l->inicio = novo;
-
+        int boleano = buscaSimples(*l, valor);
+        if(boleano == FALSE){
+            novo->prox = l->inicio;
+            l->inicio = novo;
+            l->qtd++;
+        }else{
+            printf("Valor repetido\n");
+            free(novo);
+        }
+        
     }
-    l->qtd++;
+    
 }
 
 void removerInicio(LSE *l){
