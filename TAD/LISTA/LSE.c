@@ -67,7 +67,7 @@ void removerInicio(LSE *l){
 }
 
 void removerUltimo(LSE *l){
-    if (isEmpty(l)) {
+    if (isEmpty(*l)) {
         printf("Fila vazia. Nao eh possivel desenfileirar.\n");
         exit(1);
     }
@@ -86,7 +86,7 @@ void removerUltimo(LSE *l){
 
 void list(LSE l){
     ListNode* aux;
-    if(isEmpty(&l)==1){
+    if(isEmpty(l)==1){
         printf("Fila vazia!\n");
     }
     else{
