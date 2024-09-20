@@ -110,3 +110,24 @@ void list(LSE l){
         }
     }
 }
+
+int buscaSimples(LSE l, int valor){
+    ListNode* aux;
+    
+    if(isEmpty(l)==TRUE){
+        return FALSE;
+    }
+    else{
+        aux = l.inicio;
+        while(aux != NULL){
+            if(aux->info == valor){
+                return TRUE;
+            }
+
+            aux = aux->prox;
+            
+            //aux pega o endereço do aux->prox, ou seja, ele não vai mudar o valor, ele vai ver o que está naquele endereço meu lindo.
+        }
+        return FALSE;
+    }
+}
