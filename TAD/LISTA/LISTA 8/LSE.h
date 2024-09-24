@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #define TRUE 1
 #define FALSE 0
 
@@ -34,11 +35,13 @@ void inserirFinal(LSE *l,int valor){
     novo->prox = NULL;
     if (isEmpty(*l)== TRUE) {
         l->inicio = novo;
+        l->fim = novo;
+        l->qtd++;
     } else {
         l->fim->prox = novo;
+        l->fim = novo;
+        l-> qtd++;
     }
-    l->fim = novo;
-    l-> qtd++;
 }
 
 void inserirInicio(LSE *l, int valor){
@@ -137,5 +140,22 @@ int buscaSimples(LSE l, int valor){
             //aux pega o endereço do aux->prox, ou seja, ele não vai mudar o valor, ele vai ver o que está naquele endereço meu lindo.
         }
         return FALSE;
+    }
+}
+
+void copiar(LSE lista1, LSE *lista2){
+    ListNode *aux;
+    if(isEmpty(lista1) ==TRUE){
+        return;
+    }
+    else{
+        aux = lista1.inicio;
+        while(aux != NULL){
+            
+            inserirFinal(lista2, aux->info);
+            aux = aux->prox;
+            
+        }
+        free(aux);
     }
 }
