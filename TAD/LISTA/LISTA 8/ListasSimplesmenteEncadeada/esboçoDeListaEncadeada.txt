@@ -1,0 +1,65 @@
+// Exercício: Implementação de uma lista encadeada de inteiros.
+// Implemente a lista de inteiros esboçada abaixo.
+// Depois implemente uma pequena aplicação para testar a lista (utilize como exemplo a aplicação 
+// implementada em sala para testar a fila.
+
+// Arquivo listInt.h
+#include <stdlib.h>
+typedef struct listNode {
+    int info;
+    struct listNode* prox;
+} ListNode;
+
+typedef struct lse {
+    ListNode* inicio;
+    ListNode* fim;
+    int qtd;
+} LSE;
+
+void inicializar (LSE* l) {
+    l->inicio = NULL;
+    l->fim = NULL;
+    l->qtd = 0;
+}
+
+int isEmpty(LSE l) {
+   // Função: recebe a lista como parâmetro (passado por valor) e retorna
+   // 1 se a lista estiver vazia ou 0 se não estiver vazia.
+
+}
+
+void inserirFinal (LSE* l, int valor) {
+    // Procedimento: recebe a lista como parâmetro (passado por referência)
+    // e o valor a ser inserido. Insere o valor no final da lista.
+
+}
+
+void inserirInicio (LSE* l, int valor) {
+    // Procedimento: recebe a lista como parâmetro (passado por referência)
+    // e o valor a ser inserido. Insere o valor no início da lista.
+
+}
+
+void removerInicio (LSE* l) {
+    // Procedimento: recebe a lista como parâmetro (passado por referência)
+    // remove o valor situado no início da lista.
+
+}
+
+void removerUltimo (LSE* l) {
+    // Procedimento: recebe a lista como parâmetro (passado por referência)
+    // remove o valor situado no final da lista.
+}
+
+void list (LSE l) {
+   // Procedimento: recebe a lista como parâmetro (passado por valor)
+   // e exibe todos os valores que estão na lista.
+
+}
+
+void remover (LSE* l, int valor) {
+    // Procedimento: recebe a lista como parâmetro (passado por referência)
+    // e o valor a ser removido. Procura pelo valor na lista e remove, caso encontre.
+    // Se não encontrar, emite mensagem informando o ocorrido.
+    
+}
