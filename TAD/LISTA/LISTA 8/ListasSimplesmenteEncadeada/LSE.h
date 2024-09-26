@@ -34,6 +34,9 @@ void inserirFinal (LSE* l, int valor) {
     novo->prox = NULL;
     if(isEmpty(*l)== TRUE){
         l->inicio = novo;
+        l->fim = novo;
+        l->qtd++;
+        return;
     }else{
         l->fim->prox = novo;
     }
@@ -42,14 +45,29 @@ void inserirFinal (LSE* l, int valor) {
 }
 
 void inserirInicio (LSE* l, int valor) {
-    // Procedimento: recebe a lista como parâmetro (passado por referência)
-    // e o valor a ser inserido. Insere o valor no início da lista.
-
+    ListNode *novo = (ListNode*) malloc(sizeof(ListNode));
+    novo->info = valor;
+    novo->prox = NULL;
+    if(isEmpty(*l)==TRUE){
+        return;
+    }else{
+        novo->prox = l->inicio;
+        l->inicio = novo;
+        l->qtd++;
+    }
 }
 
 void removerInicio (LSE* l) {
-    // Procedimento: recebe a lista como parâmetro (passado por referência)
-    // remove o valor situado no início da lista.
+    ListNode *aux = l->inicio;
+    if(isEmpty(*l)==TRUE){
+        free(aux);
+        return;
+    }else{
+        l->inicio = l->inicio->prox;
+        free(aux);
+        l->qtd--;
+        return;
+    }
 
 }
 
@@ -89,8 +107,22 @@ void list (LSE l) {
 }
 
 void remover (LSE* l, int valor) {
-    // Procedimento: recebe a lista como parâmetro (passado por referência)
-    // e o valor a ser removido. Procura pelo valor na lista e remove, caso encontre.
-    // Se não encontrar, emite mensagem informando o ocorrido.
+    ListNode *antes = l->inicio;
+    ListNode *depois = l->inicio->prox;
+    if(isEmpty(*l)==TRUE){
+        printf("Lista Vázia\n");
+        return;
+    }else{
+        while(depois->info != valor){
+            antes = antes->prox;
+            depois = depois->prox;
+        }
+        if(depois == NULL){
+            printf("Valor não encontrado\n");
+        }else{
+            antes->prox = depois->prox;
+            return;
+        }
+    }
     
 }
