@@ -175,3 +175,35 @@ void copiar(LSE lista1, LSE *lista2){
         
     }
 }
+void somar(LSE l1, LSE l2, LSE *l3){
+    if(isEmpty(l1)==TRUE && isEmpty(l2)==TRUE){
+        printf("Não há valores nas listas\n");
+        return;
+    }else if(isEmpty(l1)==TRUE){
+        copiar(l2, l3);
+    }else if(isEmpty(l2)==TRUE){
+        copiar(l1, l3);
+    }else{
+        ListNode *aux1 = l1.inicio;
+        ListNode *aux2 = l2.inicio;
+        while(aux1 != NULL || aux2 != NULL){
+            int soma = 0;
+            if(aux1 != NULL && aux2 != NULL){
+                soma = aux1->info + aux2->info;
+                inserirFinal(l3, soma);
+                aux1 = aux1->prox;
+                aux2 = aux2->prox;
+            }
+            else if(aux1 == NULL){
+                soma = aux2->info;
+                inserirFinal(l3, soma);
+                aux2 = aux2->prox;
+            }
+            else{
+                soma = aux1->info;
+                inserirFinal(l3, soma);
+                aux1 = aux1->prox;
+            }
+        }
+    }
+}
