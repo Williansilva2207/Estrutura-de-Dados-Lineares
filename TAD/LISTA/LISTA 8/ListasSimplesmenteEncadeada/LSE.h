@@ -114,7 +114,7 @@ void remover (LSE* l, int valor) {
         return;
     }else{
         while(depois->info != valor){
-            antes = antes->prox;
+            antes = depois;
             depois = depois->prox;
         }
         if(depois == NULL){
