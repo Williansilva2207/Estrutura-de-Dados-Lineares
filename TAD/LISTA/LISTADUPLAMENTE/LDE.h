@@ -57,7 +57,18 @@ void deTrasPraFrente(LDE l){
         printf("\n");
     }
 }
-
+void list(LDE l){
+    LDENode *aux = l.inicio;
+    if(isEmpty(l) == TRUE){
+        printf("Está vazia.\n");
+    }else{
+        while (aux != NULL){
+            printf("%d ", aux->info);
+            aux = aux->prox;
+        }
+        printf("\n");
+    }
+}
 void inserirFinal(LDE *l, int valor){
     LDENode *novo = (LDENode*) malloc(sizeof(LDENode));
     novo->ant = NULL;
