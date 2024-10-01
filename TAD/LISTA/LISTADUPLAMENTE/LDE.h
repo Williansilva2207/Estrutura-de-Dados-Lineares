@@ -37,6 +37,9 @@ void inserirInicio(LDE *l, int valor){
     if(isEmpty(*l) == TRUE){
         l->inicio = novo;
         l->fim = novo;
+    }else if(busca(*l, valor)== TRUE){
+        printf("Valor já existe.\n");
+        return;
     }else{
         novo->prox = l->inicio;
         l->inicio->ant = novo;
@@ -77,6 +80,9 @@ void inserirFinal(LDE *l, int valor){
     if(isEmpty(*l) == TRUE){
         l->inicio = novo;
         l->fim = novo;
+    }else if(busca(*l, valor)== TRUE){
+        printf("Valor já existe.\n");
+        return;
     }else{
         novo->ant = l->fim;
         l->fim->prox = novo;
@@ -120,5 +126,30 @@ void removerUltimo(LDE *l){
         l->fim->prox = NULL;
         l->qtd --;
         free(aux);
+    }
+}
+
+int busca(LDE l, int valor){
+    LDENode *aux = l.inicio;
+    if(isEmpty(l)==TRUE){
+        printf("Não há elementos na lista!\n");
+    }else{
+        while (aux != NULL)
+        {
+            if(aux->info == valor){
+                return TRUE;
+            }else{
+                aux = aux->prox;
+            }
+        }
+        return FALSE;
+    }
+}
+
+void removerValor(LDE *l, int valor){
+    if(isEmpty(*l) == TRUE){
+        printf("Está vazia!\n");
+    }else if(busca(*l, valor)==TRUE){
+        
     }
 }
