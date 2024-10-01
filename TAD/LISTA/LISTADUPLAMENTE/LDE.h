@@ -45,6 +45,69 @@ void inserirInicio(LDE *l, int valor){
     l->qtd++;
 }
 
-void lista(LDE l){
+void deTrasPraFrente(LDE l){
+    LDENode *aux = l.fim;
+    if(isEmpty(l) == TRUE){
+        printf("Está vazia.\n");
+    }else{
+        while (aux != NULL){
+            printf("%d ", aux->info);
+            aux = aux->ant;
+        }
+        printf("\n");
+    }
+}
 
+void inserirFinal(LDE *l, int valor){
+    LDENode *novo = (LDENode*) malloc(sizeof(LDENode));
+    novo->ant = NULL;
+    novo->prox = NULL;
+    novo->info = valor;
+    if(isEmpty(*l) == TRUE){
+        l->inicio = novo;
+        l->fim = novo;
+    }else{
+        novo->ant = l->fim;
+        l->fim->prox = novo;
+        l->fim = novo;
+    }
+    l->qtd++;
+}
+
+void removerPrimeiro(LDE *l){
+    LDENode *aux = l->inicio;
+    
+    if(isEmpty(*l) == TRUE){
+        printf("Está vazia.\n");
+        
+    }else if(l->qtd == 1){
+        l->inicio = NULL;
+        l->fim = NULL;
+        l->qtd --;
+        free(aux);
+    }else{
+        l->inicio = l->inicio->prox;
+        l->inicio->ant = NULL;
+        l->qtd --;
+        free(aux);
+    }
+}
+
+void removerUltimo(LDE *l){
+    LDENode *aux = l->fim;
+    
+    if(isEmpty(*l) == TRUE){
+        printf("Está vazia.\n");
+        
+    }else if(l->qtd == 1){
+        l->inicio = NULL;
+        l->fim = NULL;
+        l->qtd --;
+        free(aux);
+    }else{
+        l->fim = l->fim->ant;
+        l->fim->prox = NULL;
+        l->qtd --;
+        free(aux);
+    }
 }
