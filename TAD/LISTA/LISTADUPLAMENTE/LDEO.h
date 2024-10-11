@@ -39,7 +39,7 @@ LDENode* criarNovo ( int valor){
 }
 
 void inserir (LDE *list, int valor){
-    LDENode*novo, *aux;
+    LDENode*novo, *aux, *anterior;
 
     if(isEmpty(*list)==TRUE){
         novo = criarNovo(valor);
@@ -67,5 +67,25 @@ void inserir (LDE *list, int valor){
         list->fim->prox = novo;
         list->fim = novo;
         list->qtd++;
+    }
+    else{
+        aux = list->inicio;
+        while(){
+            if(aux->info == valor){
+                printf("Valor repetido. Inserção não efetuada \n");
+                return;
+            }else if(aux->info > valor){
+                novo = criarNovo(valor);
+                anterior = aux->ant;
+                anterior->prox = novo;
+                novo->ant = anterior;
+                aux->ant = novo;
+                novo->prox = aux;
+                list->qtd++;
+                return;
+            }else{
+                aux = aux->prox;
+            }
+        }
     }
 }
