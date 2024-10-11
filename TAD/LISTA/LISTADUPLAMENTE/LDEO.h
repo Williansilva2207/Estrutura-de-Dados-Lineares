@@ -56,5 +56,16 @@ void inserir (LDE *list, int valor){
         novo->prox = list->inicio;
         list->inicio->ant = novo;
         list->inicio = novo;
+        list->qtd++;
+    }
+    else if(valor == list->fim->info){
+        printf("Valor repetido, inserção não efetuada.\n");
+    }
+    else if (valor > list->fim->info){
+        novo = criarNovo(valor);
+        novo->ant = list->fim;
+        list->fim->prox = novo;
+        list->fim = novo;
+        list->qtd++;
     }
 }
