@@ -70,7 +70,7 @@ void inserir (LDE *list, int valor){
     }
     else{
         aux = list->inicio;
-        while(){
+        while(TRUE){
             if(aux->info == valor){
                 printf("Valor repetido. Inserção não efetuada \n");
                 return;
