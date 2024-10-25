@@ -1,0 +1,23 @@
+void removerTodos(ListaC* lista){
+    if(isEmpty(*lista) == TRUE){
+        printf("Lista vazia."\n);
+    
+    }
+    else if(lista->qtd == 1){
+        free(lista->inicio);
+        lista->inicio = NULL;
+        lista->fim = NULL;
+        lista->qtd = 0;
+    }
+    else{
+        while(isEmpty(*lista) == FALSE){
+            aux = lista->inicio;
+            lista->inico = lista->inicio->prox;
+            list->qtd--;
+            lista->fim->prox = lista->inicio;
+            free(aux);
+        }
+        lista->inicio = NULL;
+        lista->fim = NULL;
+    }
+}
