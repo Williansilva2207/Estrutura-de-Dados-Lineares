@@ -75,10 +75,10 @@ void inserirOrdenado(LDECirc *lista, int valor){
         lista->qtd++;
     }else{//inserir no meio
         atual = lista->inicio->prox;
-        while(){
+        while(TRUE){
             if(valor == atual->info){
                 printf("Valor repetido. Inserção não efetuada!\n");
-                return;
+                break;
             }
             else if(valor < atual->info){
                 anterior = atual->ant;
@@ -88,6 +88,7 @@ void inserirOrdenado(LDECirc *lista, int valor){
                 atual->ant = novo;
                 novo->prox = atual;
                 lista->qtd++;
+                break;
             }
             else{
                 atual = atual->prox;
