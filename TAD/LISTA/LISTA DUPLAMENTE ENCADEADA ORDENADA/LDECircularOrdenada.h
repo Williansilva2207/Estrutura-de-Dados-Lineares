@@ -39,6 +39,8 @@ LDENode* criarNo(int valor){
 
 void inserirOrdenado(LDECirc *lista, int valor){
     LDENode* novo;
+    LDENode* atual;
+    LDENode* anterior;
     if(isEmpty(*lista)==TRUE){
         novo = criarNo(valor);
         lista->inicio = novo;
@@ -59,5 +61,37 @@ void inserirOrdenado(LDECirc *lista, int valor){
         lista->fim->prox = lista->inicio;
         lista->inicio->ant = lista->fim;
         lista->qtd ++;
+    }
+    else if(valor == lista->fim->info){
+        printf("Valor repetido. Inserção não efetuada! \n");
+
+    }else if(valor > lista->fim->info){
+        novo = criarNo(valor);
+        novo->ant = lista->fim;
+        lista->fim->prox = novo;
+        lista->fim = novo;
+        novo->prox = lista->inicio; //lista->fim->prox = lista->inicio;
+        lista->inicio->ant = novo; // lista->inicio->ant = lista->fim;
+        lista->qtd++;
+    }else{//inserir no meio
+        atual = lista->inicio->prox;
+        while(){
+            if(valor == atual->info){
+                printf("Valor repetido. Inserção não efetuada!\n");
+                return;
+            }
+            else if(valor < atual->info){
+                anterior = atual->ant;
+                novo = criarNo(valor);
+                anterior->prox = novo;
+                novo->ant = anterior;
+                atual->ant = novo;
+                novo->prox = atual;
+                lista->qtd++;
+            }
+            else{
+                atual = atual->prox;
+            }
+        }
     }
 }
