@@ -111,7 +111,7 @@ LDECirc dividir(LDECirc *L1){
                 aux2.fim = L1->fim;
                 aux2.fim->prox = aux2.inicio;
                 aux2.inicio->ant = aux2.fim;
-                aux2.qtd = (L1->qtd/2) - (L1->qtd);
+                aux2.qtd = (L1->qtd) - (L1->qtd/2);
                 L1->fim = aux->ant;
                 L1->fim->prox = L1->inicio;
                 L1->inicio->ant = L1->fim;
