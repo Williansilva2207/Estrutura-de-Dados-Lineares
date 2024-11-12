@@ -97,19 +97,21 @@ void inserirOrdenado(LDECirc *lista, int valor){
     }
 }
 
-LDECirc *dividir(LDECirc *L1){
+LDECirc dividir(LDECirc *L1){
     LDENode*aux = L1->inicio;
-    LDECirc*aux2;
+    LDECirc aux2;
+    incializar(&aux2);
     int ctd = 0;
     if(L1->qtd == 1){
-        printf("Não tem como dividir a lista com 1 nó\n");
+         return aux2;
     }else{
         while(TRUE){
             if(ctd > L1->qtd/2){
-                aux2->inicio = aux;
-                aux2->fim = L1->fim;
-                aux2->fim->prox = aux2->inicio;
-                aux2->inicio->ant = aux2->fim;
+                aux2.inicio = aux;
+                aux2.fim = L1->fim;
+                aux2.fim->prox = aux2.inicio;
+                aux2.inicio->ant = aux2.fim;
+                aux2.qtd = (L1->qtd/2) - (L1->qtd);
                 L1->fim = aux->ant;
                 L1->fim->prox = L1->inicio;
                 L1->inicio->ant = L1->fim;
