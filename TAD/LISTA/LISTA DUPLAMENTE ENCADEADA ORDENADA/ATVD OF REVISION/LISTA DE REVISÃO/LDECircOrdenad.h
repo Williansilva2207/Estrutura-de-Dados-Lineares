@@ -38,7 +38,7 @@ LDENode *makeNo(int valor){
     return novo; 
 }
 
-void insertion(LDECirc *list, int valor){
+void inserir(LDECirc *list, int valor){
     LDENode *novo;
     
     if(isEmpty(*list) == TRUE){
@@ -90,6 +90,47 @@ void insertion(LDECirc *list, int valor){
             }else{
                 aux = aux->prox;
             }
+        }
+    }
+}
+
+void concatenar(LDECirc *list, LDECirc *list2){
+    LDECirc *novo;
+    start(novo);
+    novo = list2;
+    list->fim->prox = novo->inicio;
+    novo->inicio->ant = list->fim;
+    list->inicio->ant = novo->fim;
+    novo->fim->prox = list->inicio;  
+    list->fim = novo->fim;
+    list->qtd = list->qtd + novo->qtd;
+
+}
+
+void esvaziar(LDECirc* list2){
+    LDENode *aux;
+    aux = list2->inicio->prox;
+    while(TRUE){
+        if(aux != list2->fim){
+            free(aux->ant);
+            aux = aux->prox;
+        }else{
+            free(aux);
+            return;
+        }
+    } 
+}
+
+void listar(LDECirc list){
+    LDENode *aux;
+    aux = list.inicio;
+    while(TRUE){
+        if(aux != list.fim){
+            printf("Valor: %d", aux->valor);
+            aux = aux->prox;
+        }else{
+            printf("Valor: %d", aux->valor);
+            return;
         }
     }
 }
