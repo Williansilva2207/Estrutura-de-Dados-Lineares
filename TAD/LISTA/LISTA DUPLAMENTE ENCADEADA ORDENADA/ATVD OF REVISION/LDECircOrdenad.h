@@ -101,7 +101,7 @@ LDECirc dividir(LDECirc *L1){
     LDENode*aux = L1->inicio;
     LDECirc aux2;
     incializar(&aux2);
-    int ctd = 0;
+    int ctd = 1;
     if(L1->qtd == 1){
          return aux2;
     }else{
