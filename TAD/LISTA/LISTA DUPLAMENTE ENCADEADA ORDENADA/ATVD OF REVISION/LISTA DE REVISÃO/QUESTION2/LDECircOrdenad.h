@@ -91,3 +91,26 @@ void inserir(LDECirc *list, int valor){
         }
     }
 }
+
+LDECirc *dividir(LDECirc *list){
+    LDENode *aux;
+    LDECirc *list2;
+    int ctd = 1;
+    aux = list->incio;
+    while(TRUE){
+        if(ctd > list->qtd/2){
+            list2->incio = aux;
+            list2->fim = list->fim;
+            list2->incio->ant = list2->fim;
+            list2->fim->prox = list2->incio;
+            list->qtd = list2->qtd - list->qtd/2;
+            list->fim = aux->ant;
+            list->fim->prox = list->incio;
+            list->incio->ant = list->fim;
+            return list2;
+        }else{
+            aux = aux->prox;
+            ctd ++;
+        }
+    }
+}
