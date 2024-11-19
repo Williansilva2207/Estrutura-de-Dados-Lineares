@@ -106,7 +106,19 @@ void concatenar(LDECirc *list, LDECirc *list2){
 
 }
 
-
+void esvaziar(LDECirc* list2){
+    LDENode *aux;
+    aux = list2->inicio->prox;
+    while(TRUE){
+        if(aux != list2->fim){
+            aux->ant = NULL;
+            aux = aux->prox;
+        }else{
+            aux = NULL;
+            return;
+        }
+    } 
+}
 
 void listar(LDECirc list){
     LDENode *aux;

@@ -40,7 +40,7 @@ int main(){
             break;
         case 3:
             concatenar(&list, &list2);
-            
+            esvaziar(&list2);
             break;
         case 4:
             listar(list);
