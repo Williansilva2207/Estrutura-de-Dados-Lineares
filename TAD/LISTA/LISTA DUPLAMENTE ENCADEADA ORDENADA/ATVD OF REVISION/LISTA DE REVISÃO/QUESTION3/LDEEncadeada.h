@@ -66,3 +66,22 @@ void inserir(LDEEnca *list, int valor){
         }
     }
 }
+
+int comparar(LDEEnca *list, LDEEnca *list2){
+    LDENode *aux;
+    LDENode *aux2;
+    aux = list->inicio;
+    aux2 = list2->inicio;
+    while(TRUE){
+        if(aux->info != aux2->info){
+            return FALSE;
+        }else if(aux == list->fim && aux2 == list2->fim && aux->info != aux2->info){
+            return FALSE;
+        }else if(aux == list->fim && aux2 == list2->fim && aux->info == aux2->info){
+            return TRUE;
+        }else{
+            aux = aux->prox;
+            aux2 = aux2->prox;
+        }
+    }
+}
