@@ -96,7 +96,6 @@ void inserir(LDECirc *list, int valor){
 
 void concatenar(LDECirc *list, LDECirc *list2){
     LDECirc *novo;
-    start(novo);
     novo = list2;
     list->fim->prox = novo->inicio;
     novo->inicio->ant = list->fim;
@@ -107,29 +106,17 @@ void concatenar(LDECirc *list, LDECirc *list2){
 
 }
 
-void esvaziar(LDECirc* list2){
-    LDENode *aux;
-    aux = list2->inicio->prox;
-    while(TRUE){
-        if(aux != list2->fim){
-            free(aux->ant);
-            aux = aux->prox;
-        }else{
-            free(aux);
-            return;
-        }
-    } 
-}
+
 
 void listar(LDECirc list){
     LDENode *aux;
     aux = list.inicio;
     while(TRUE){
         if(aux != list.fim){
-            printf("Valor: %d", aux->valor);
+            printf("Valor: %d\n", aux->valor);
             aux = aux->prox;
         }else{
-            printf("Valor: %d", aux->valor);
+            printf("Valor: %d\n", aux->valor);
             return;
         }
     }
