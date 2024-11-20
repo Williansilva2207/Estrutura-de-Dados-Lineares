@@ -91,13 +91,63 @@ void inserirOrdenado(char name[],int matricula, double media, int faltas, LDECir
                 bef = aux->ant;
                 novo->prox = aux;
                 aux->ant = novo;
-                bef->prox = novo;
+                bef->prox = novo;   
                 novo->ant = bef;
                 list->qtd ++;
                 return;
             }else{
                 aux = aux->prox;
             }
+        }
+    }
+}
+
+void aprovados(LDECirc list,LDECirc *listAp, LDECirc *listMedFalt, LDECirc *listFalt){
+    LDENode *aux;
+    LDENode *novo;
+    aux = list.inicio;
+    int ctd = 1;
+    while(ctd < list.qtd){
+        if(aux->info->media >= 7.0 && aux->info->falta < 19 ){
+            if(isEmpty(*listAp)==TRUE){
+                novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
+                listAp->inicio = novo;
+                listAp->fim = novo;
+                novo->prox = novo;
+                novo->ant = novo;
+                listAp->qtd ++;
+                ctd++;
+            }else{
+                novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
+                listAp->fim->prox = novo;
+                novo->ant = listAp->fim;
+                listAp->fim = novo;
+                listAp->fim->prox = listAp->inicio;
+                listAp->inicio->ant = listAp->fim;
+                listAp->qtd ++;
+                ctd++;
+            }
+
+        }else if(aux->info->falta > 18 ){
+            if(isEmpty(*listFalt)==TRUE){
+                novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
+                listFalt->inicio = novo;
+                listFalt->fim = novo;
+                novo->prox = novo;
+                novo->ant = novo;
+                listFalt->qtd ++;
+                ctd++;
+            }else{
+                novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
+                listFalt->fim->prox = novo;
+                novo->ant = listFalt->fim;
+                listFalt->fim = novo;
+                listFalt->fim->prox = listFalt->inicio;
+                listFalt->inicio->ant = listFalt->fim;
+                listFalt->qtd ++;
+                ctd++;
+            }
+
         }
     }
 }
