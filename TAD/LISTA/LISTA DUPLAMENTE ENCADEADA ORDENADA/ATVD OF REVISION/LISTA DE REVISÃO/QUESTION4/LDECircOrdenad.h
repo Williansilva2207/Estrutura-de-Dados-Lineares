@@ -115,7 +115,7 @@ void aprovados(LDECirc list,LDECirc *listAp, LDECirc *listMedFalt, LDECirc *list
                 listAp->fim = novo;
                 novo->prox = novo;
                 novo->ant = novo;
-                listAp->qtd ++;
+                listAp->qtd = 1;
                 ctd++;
             }else{
                 novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
@@ -135,7 +135,7 @@ void aprovados(LDECirc list,LDECirc *listAp, LDECirc *listMedFalt, LDECirc *list
                 listFalt->fim = novo;
                 novo->prox = novo;
                 novo->ant = novo;
-                listFalt->qtd ++;
+                listFalt->qtd = 1;
                 ctd++;
             }else{
                 novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
@@ -145,6 +145,26 @@ void aprovados(LDECirc list,LDECirc *listAp, LDECirc *listMedFalt, LDECirc *list
                 listFalt->fim->prox = listFalt->inicio;
                 listFalt->inicio->ant = listFalt->fim;
                 listFalt->qtd ++;
+                ctd++;
+            }
+
+        }else if(aux->info->media < 7.0 ){
+            if(isEmpty(*listMedFalt)==TRUE){
+                novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
+                listMedFalt->inicio = novo;
+                listMedFalt->fim = novo;
+                novo->prox = novo;
+                novo->ant = novo;
+                listMedFalt->qtd = 1;
+                ctd++;
+            }else{
+                novo = criarNo(aux->info->nome,aux->info->mat,aux->info->media,aux->info->falta);
+                listMedFalt->fim->prox = novo;
+                novo->ant = listMedFalt->fim;
+                listMedFalt->fim = novo;
+                listMedFalt->fim->prox = listMedFalt->inicio;
+                listMedFalt->inicio->ant = listMedFalt->fim;
+                listMedFalt->qtd ++;
                 ctd++;
             }
 
