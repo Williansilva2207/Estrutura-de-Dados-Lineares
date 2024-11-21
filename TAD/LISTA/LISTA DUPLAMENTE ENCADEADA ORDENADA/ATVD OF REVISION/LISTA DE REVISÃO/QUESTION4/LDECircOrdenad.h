@@ -40,9 +40,10 @@ int isEmpty(LDECirc list){
 
 LDENode *criarNo(char name[], int matricula, double media, int faltas){
     LDENode *novo = (LDENode*) malloc(sizeof(LDENode));
+    novo->info = (Information*) malloc (sizeof(Information));
     novo->prox = NULL;
     novo->ant = NULL;
-    strcpy(novo->info->nome, name);
+    strcpy(novo->info->nome,name);
     novo->info->mat = matricula;
     novo->info->media = media;
     novo->info->falta = faltas;
@@ -106,7 +107,7 @@ void aprovados(LDECirc list,LDECirc *listAp, LDECirc *listMedFalt, LDECirc *list
     LDENode *aux;
     LDENode *novo;
     aux = list.inicio;
-    int ctd = 1;
+    int ctd = 0;
     while(ctd < list.qtd){
         if(aux->info->media >= 7.0 && aux->info->falta < 19 ){
             if(isEmpty(*listAp)==TRUE){
@@ -169,5 +170,21 @@ void aprovados(LDECirc list,LDECirc *listAp, LDECirc *listMedFalt, LDECirc *list
             }
 
         }
+
+        aux = aux->prox;
+    }
+}
+
+void listar(LDECirc list){
+    LDENode *aux;
+    aux = list.inicio;
+    int ctd = 0;
+    while(ctd < list.qtd){
+        printf("Nome: %s\n", aux->info->nome);
+        printf("Matricula: %d\n", aux->info->mat);
+        printf("Faltas: %d\n", aux->info->falta);
+        printf("Media: %lf\n", aux->info->media);
+        aux = aux->prox;
+        ctd ++;
     }
 }
