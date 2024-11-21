@@ -90,3 +90,94 @@ void inserirOrdenado(LDECirc *list, int valor){
         }
     }
 }
+void inserir(LDECirc *list, int valor){
+    
+    LDENode *novo;
+    if(isEmpty(*list)==TRUE){
+        novo = criarNo(valor);
+        list->inicio = novo;
+        list->fim = novo;
+        novo->prox = novo;
+        novo->ant = novo;
+        list->qtd = 1;
+    }else{
+        novo = criarNo(valor);
+        list->fim->prox = novo;
+        novo->ant = list->fim;
+        list->fim = novo;
+        list->fim->prox = list->inicio;
+        list->inicio->ant = list->fim;
+        list->qtd++;
+    }
+}
+void listaIntercalada(LDECirc list, LDECirc list2, LDECirc *list3){
+    LDENode *aux;
+    LDENode *aux2;
+    LDENode *novo;
+    aux = list.inicio;
+    aux2 = list2.inicio;
+    incializar(list3);
+    if(isEmpty(list)==TRUE && isEmpty(list2)==TRUE){
+        printf("Listas vazias.\n");
+        return;
+    }else if(isEmpty(list)==FALSE && isEmpty(list2)==TRUE){
+        while(TRUE){
+            
+            if(aux2->info == list2.fim->info){
+                inserirOrdenado(list3,aux2->info);
+                return;
+            }
+            inserirOrdenado(list3,aux2->info);
+            aux2 = aux2->prox;
+        }
+    }else if(isEmpty(list)==TRUE && isEmpty(list2)==FALSE){
+        while(TRUE){
+            
+            if(aux->info == list.fim->info){
+                inserirOrdenado(list3,aux->info);
+                return;
+            }
+            inserirOrdenado(list3,aux2->info);
+            aux = aux->prox;
+        }
+    }else{
+        while(TRUE){
+            if(list2.qtd > list.qtd){
+                if(aux->info != list.fim->info){
+                    inserir(list3, aux->info);
+                }
+                if(aux2->info == list2.fim->info){
+                    inserir(list3, aux2->info);
+                    return;    
+                }
+                inserir(list3, aux2->info);
+                
+            }else if(list2.qtd < list.qtd){
+                if(aux->info != list2.fim->info){
+                    inserir(list3, aux2->info);
+                }
+                if(aux2->info == list.fim->info){
+                    inserir(list3, aux->info);
+                    return;    
+                }
+                inserir(list3, aux->info);
+            }else if(list2.qtd == list.qtd){
+                if(aux->info == list.fim->info){
+                    inserir(list3, aux2->info);
+                    inserir(list3, aux->info);
+                    return;
+                }
+                inserir(list3, aux2->info);
+                inserir(list3, aux->info);
+            }
+            aux = aux->prox;
+            aux2 = aux2->prox;
+            if(aux->info == aux2->info){
+                
+                aux = aux->prox;
+                aux2 = aux2->prox;
+            }  
+        }
+    }
+}
+    
