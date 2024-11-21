@@ -124,7 +124,7 @@ void listaIntercalada(LDECirc list, LDECirc list2, LDECirc *list3){
         while(TRUE){
             
             if(aux2->info == list2.fim->info){
-                inserirOrdenado(list3,aux2->info);
+                inserir(list3,aux2->info);
                 return;
             }
             inserirOrdenado(list3,aux2->info);
@@ -134,7 +134,7 @@ void listaIntercalada(LDECirc list, LDECirc list2, LDECirc *list3){
         while(TRUE){
             
             if(aux->info == list.fim->info){
-                inserirOrdenado(list3,aux->info);
+                inserir(list3,aux->info);
                 return;
             }
             inserirOrdenado(list3,aux2->info);
@@ -149,26 +149,34 @@ void listaIntercalada(LDECirc list, LDECirc list2, LDECirc *list3){
                 if(aux2->info == list2.fim->info){
                     inserir(list3, aux2->info);
                     return;    
+                }else{
+
+                    inserir(list3, aux2->info);
                 }
-                inserir(list3, aux2->info);
                 
             }else if(list2.qtd < list.qtd){
-                if(aux->info != list2.fim->info){
+                
+                if(aux->info == list.fim->info){
+                    inserir(list3, aux->info);
+                    if(aux2->info != list2.fim->info){
+                        inserir(list3, aux2->info);
+                    }
+                    return;    
+                }else{
+                    
+                    inserir(list3, aux->info);
+                }
+                if(aux2->info != list2.fim->info){
                     inserir(list3, aux2->info);
                 }
-                if(aux2->info == list.fim->info){
-                    inserir(list3, aux->info);
-                    return;    
-                }
-                inserir(list3, aux->info);
             }else if(list2.qtd == list.qtd){
                 if(aux->info == list.fim->info){
-                    inserir(list3, aux2->info);
                     inserir(list3, aux->info);
+                    inserir(list3, aux2->info);
                     return;
                 }
-                inserir(list3, aux2->info);
                 inserir(list3, aux->info);
+                inserir(list3, aux2->info);
             }
             aux = aux->prox;
             aux2 = aux2->prox;
@@ -181,3 +189,15 @@ void listaIntercalada(LDECirc list, LDECirc list2, LDECirc *list3){
     }
 }
     
+void listar(LDECirc list){
+    LDENode *aux;
+    aux = list.inicio;
+    int ctd = 0;
+    while(ctd < list.qtd){
+        
+        printf("%d\n", aux->info);
+        
+        aux = aux->prox;
+        ctd ++;
+    }
+}
