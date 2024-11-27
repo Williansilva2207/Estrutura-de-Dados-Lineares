@@ -128,6 +128,16 @@ int buscar(No* tabelaHashing[], char placa[]) {
 	   3 - Caso encontre, retornar a posição da chave no arquivo.
 	   4 - Caso não encontre, retornar -1 
                  */
+	int indice = hashing(placa);
+	No* aux = tabelaHashing[indice];
+	while(aux != NULL){
+		if(strcmp(aux->placa, placa)==0){
+			return aux->posicao;
+		}else{
+			aux = aux->prox;
+		}
+	}
+	return -1;
 }
 
 void inserirTabelaHash(No* tabelaHashing[], char placa[], int pos) {
