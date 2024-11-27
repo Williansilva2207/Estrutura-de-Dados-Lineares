@@ -189,7 +189,8 @@ void removerTabelaHash(No* tabelaHashing[], char placa[], int posTabela) {
 	*/
 	int indice = hashing(placa);
 	No* aux = tabelaHashing[indice];
-	if(strcmp(aux->placa, placa) == 0){
+	if(strcmp(aux->placa, placa) == 0 && aux->prox == NULL){
+		
 		free(aux);
 	}else{
 		No* aux = tabelaHashing[indice]->prox;
@@ -201,7 +202,7 @@ void removerTabelaHash(No* tabelaHashing[], char placa[], int posTabela) {
 				free(aux);
 				return;
 			}else if(strcmp(aux->placa, placa)== 0 && aux->prox == NULL){
-				anterior->prox = NULL;
+				
 				free(aux);
 				return;
 			}else{
