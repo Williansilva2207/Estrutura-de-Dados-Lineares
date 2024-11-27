@@ -377,7 +377,24 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 }
 
 void exibirCadastro(FILE* arq) {
-	/* Exibe todos os registros de carros ATIVOS constantes no arquivo. */
+	if(arq == NULL){
+		printf("Não é possível abrir o arquivo.\n");
+		return;
+	}
+	rewind(arq);
+	CARRO carro;
+    while ( fread(&carro, sizeof(CARRO), 1, arq)) {
+        
+        if (carro.status == 1) {
+            
+            printf("Placa: %s\n", carro.placa);
+            printf("Marca: %s\n", carro.marca);
+            printf("Modelo: %s\n", carro.modelo);
+            printf("Cor: %s\n", carro.cor);
+            printf("Status: %d\n", carro.status);
+            printf("-----------------------------\n");
+        }
+    }
 }
 
 
