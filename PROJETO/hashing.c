@@ -124,12 +124,7 @@ void exibirOpcoes() {
 }
 
 int buscar(No* tabelaHashing[], char placa[]) {
-	/* Procurar na tabela de hashing a placa desejada e retornar a posição da placa no arquivo.
-	   1 - Aplicar a função de hashing na chave (ou seja, na placa).
-	   2 - Procurar a chave na lista indicada pelo resultado da função (usar busca sequencial melhorada).
-	   3 - Caso encontre, retornar a posição da chave no arquivo.
-	   4 - Caso não encontre, retornar -1 
-                 */
+	
 	int indice = hashing(placa);
 	No* aux = tabelaHashing[indice];
 	while(aux != NULL){
