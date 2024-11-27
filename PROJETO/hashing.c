@@ -110,25 +110,25 @@ void criarIndice(FILE* arq, No* tabelaHashing[]) {
 	                na lista encadeada correspondente, de forma que a lista permaneça ordenada 
                                  por ordem crescente de placa.
 	*/
-	if(arq == NULL){
-		for(int i = 0; i < N; i++){
-			tabelaHashing[i] = NULL;
-		}
-	}else{
-		CARRO carro;
-		int posicao = 0;
-		rewind(arq);
- 
-    	while (fread(&carro, sizeof(CARRO), 1, arq) == 1) {
-    		if (carro.status == 1) {
-           		
-            	inserirTabelaHash(tabelaHashing, carro.placa, posicao);
-        	}
-        	posicao++;
-    	}
+	
+	for(int i = 0; i < N; i++){
+		tabelaHashing[i] = NULL;
 	}
 	
+	CARRO carro;
+	int posicao = 0;
+	rewind(arq);
+ 
+    while (fread(&carro, sizeof(CARRO), 1, arq) == 1) {
+    	if (carro.status == 1) {
+           		
+        	inserirTabelaHash(tabelaHashing, carro.placa, posicao);
+    	}
+    	posicao++;
+	}
 }
+	
+
 
 void desalocarIndice(No* tabelaHashing[]) {
 	
