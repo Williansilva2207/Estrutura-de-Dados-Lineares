@@ -101,7 +101,8 @@ void liberarArquivo(FILE* arq) {
             fwrite(&carro, sizeof(CARRO),1,novo);
         }
     }
-
+	fclose(arq);
+	fclose(novo);
 	remove("carros.dat");
 	rename("temp.dat", "carros.dat");
 }
