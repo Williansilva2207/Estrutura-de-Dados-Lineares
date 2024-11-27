@@ -131,8 +131,16 @@ void criarIndice(FILE* arq, No* tabelaHashing[]) {
 }
 
 void desalocarIndice(No* tabelaHashing[]) {
-	/* Desalocar os nós que compõem as listas da tabela de hashing.
-	*/
+	
+ 	for (int i = 0; i < N; i++) {
+        No* atual = tabelaHashing[i];
+        while (atual != NULL) {
+            No* anterior = atual;
+            atual = atual->prox;
+            free(anterior);
+        }
+        tabelaHashing[i] = NULL;  
+    }
 }
 
 void exibirOpcoes() {
