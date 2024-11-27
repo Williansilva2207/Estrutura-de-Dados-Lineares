@@ -1,4 +1,3 @@
-/* Arquivo com acesso direto via hashing */
 #include <stdio.h>
 #include <string.h>
 #define N 57
@@ -7,7 +6,7 @@ typedef struct carro {
 	char marca[15];
 	char modelo[15];
 	char cor[15];
-	int status;  // 1 - ativo ou 0 - removido
+	int status;  
 } CARRO;
 
 typedef struct noTabela {
@@ -89,6 +88,22 @@ void liberarArquivo(FILE* arq) {
 	*      1.4 - Remover o arquivo de carros ("carros.dat").
 	*      1.5 - Renomear o arquivo novo com o nome "carros.dat".
 	*/
+	FILE* novo = prepararArquivo("temp.dat");
+	if(arq == NULL){
+		printf("Não é possível abrir o arquivo.\n");
+		return;
+	}
+	rewind(arq);
+	CARRO carro;
+    while ( fread(&carro, sizeof(CARRO), 1, arq)) {
+        
+        if (carro.status == 1) {
+            fwrite(&carro, sizeof(CARRO),1,novo);
+        }
+    }
+
+	remove("carros.dat");
+	rename("temp.dat", "carros.dat");
 }
 
 void criarIndice(FILE* arq, No* tabelaHashing[]) {
@@ -184,9 +199,7 @@ void inserirTabelaHash(No* tabelaHashing[], char placa[], int pos) {
 }
 
 void removerTabelaHash(No* tabelaHashing[], char placa[], int posTabela) {
-	/* Remover da tabela de hashing o nó que contem a placa passada como parâmetro. 
-	* Recebe como parâmetro também a posição na tabela onde a chave se encontra.
-	*/
+
 	int indice = hashing(placa);
 	No* aux = tabelaHashing[indice];
 	if(strcmp(aux->placa, placa) == 0 && aux->prox == NULL){
@@ -254,13 +267,7 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 }
 
 void consultar(FILE* arq, No* tabelaHashing[]) {
-	/* Consultar o registro do carro no arquivo
-                  * 1 - Solicita a placa do carro a ser consultado.
-                  * 2 - Procura pela placa na tabela de hashing.
-                  * 3 - Caso não encontre, informa que o carro não está no cadastro.
-                  * 4 - Caso encontre, vai ao arquivo, na posição indicada, 
-	 *     lê o registro do carro e exibe seus dados.
-                  */
+
 	char placa[8];
 	printf("Informe a placa do carro:\n");
 	fgets(placa, 15, stdin);
@@ -282,14 +289,7 @@ void consultar(FILE* arq, No* tabelaHashing[]) {
 }
 
 void alterar(FILE* arq, No* tabelaHashing[]) {
-	/* Alterar o registro do carro no arquivo.
-	 * 1 - Solicita a placa do carro a ser alterado.
-	 * 2 - Procura pela placa na tabela de hashing.
-	 * 3 - Caso não encontre, informa que o carro não está no cadastro.
-	 * 4 - Caso encontre, vai ao arquivo, na posição indicada, lê o registro do carro e 
-                         exibe seus dados.
-	 * 5 - Pergunta ao usuário quais dados deseja alterar. Efetiva a alteração dos dados no arquivo.
-	*/
+
 	char placa[8];
 	printf("Informe a placa do carro a ser alterada:\n");
 	fgets(placa, 15, stdin);
@@ -338,16 +338,7 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 }
 
 void remover(FILE* arq, No* tabelaHashing[]) {
-	/* Remover o registro do carro do arquivo
-	 * 1 - Solicita a placa do carro a ser removido.
-	 * 2 - Procura pela placa na tabela de hashing.
-	 * 3 - Caso não encontre, informa que o carro não está no cadastro.
-	 * 4 - Caso encontre, vai ao arquivo, na posição indicada, lê o registro do carro e exibe seus dados.
-	 * 5 - Pergunta ao usuário se deseja realmente removê-lo. Efetiva a remoção que consiste 
-                         em alterando no arquivo o STATUS do registro do carro para 0 (removido).
-	 * 5 - Remove o nó que contém a chave, juntamente com sua posição no arquivo, 
-                          da tabela de hashing. Utilize para isso o procedimento "removerTabelaHash".
-	*/
+
 	char placa[8];
 	printf("Informe a placa do carro:\n");
 	fgets(placa, 15, stdin);
