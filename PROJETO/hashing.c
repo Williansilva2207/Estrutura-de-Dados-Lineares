@@ -143,14 +143,7 @@ int buscar(No* tabelaHashing[], char placa[]) {
 }
 
 void inserirTabelaHash(No* tabelaHashing[], char placa[], int pos) {
-	/* Inserir na tabela hashing, na lista encadeada indicada pela função de hashing, 
-	* uma chave e sua posição no arquivo.
-	* 1 - Aplicar a função de hashing à chave (ou seja, a placa).
-	* 2 - O resultado da função indica a posição na tabela onde a chave será inserida.
-	* 3 - Criar nó, preencher com a chave e a posição dela no arquivo e inserir na tabela, 
-	* na lista encadeada correspondente, de forma que a lista permaneça ordenada 
-                 * por ordem crescente de placa.
-	*/
+	
 	int indiceHash = hashing(placa);
 	No* novo;
 	novo = (No*) malloc(sizeof(No));
@@ -209,14 +202,6 @@ int hashing(char placa[]) {
 
 
 void cadastrar(FILE* arq, No* tabelaHashing[]) {
-	/* Cadastrar o registro do carro no arquivo e inserir a chave (placa) na tabela de hashing.
-	* 1 - Solicita a placa do carro a ser cadastrado.
-	* 2 - Procura pela placa na tabela de hashing.
-	* 3 - Caso encontre, informa que o carro já está no cadastro.
-	* 4 - Caso não encontre, solicita os demais dados do carro, o insere no final do arquivo.
-	* 5 - Insere a chave, juntamente com sua posição no arquivo, na tabela de hashing.
-	*     Utilize para isso o procedimento "inserirTabelaHash".
-	*/
 	
 	CARRO carro;
 	printf("Digite a placa do carro:\n");
