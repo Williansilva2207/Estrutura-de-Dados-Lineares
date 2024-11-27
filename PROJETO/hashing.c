@@ -72,7 +72,9 @@ FILE* prepararArquivo(char nome[]) {
             printf("Erro ao criar ou abrir o arquivo: %s\n", nome);
             return NULL;
         }
-    }
+    
+	}
+	
     return arquivo;
 }
 
@@ -215,6 +217,32 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 	* 5 - Insere a chave, juntamente com sua posição no arquivo, na tabela de hashing.
 	*     Utilize para isso o procedimento "inserirTabelaHash".
 	*/
+	
+	CARRO carro;
+	printf("Digite a placa do carro:\n");
+	fgets(carro.placa, 8, stdin);
+	int busca = buscar(tabelaHashing, carro.placa);
+	if(busca != -1){
+		printf("O carro já está cadastrado.\n");
+	}else{
+		printf("Digite a marca:\n");
+		fgets(carro.marca, 15, stdin);
+		
+		printf("Digite a modelo:\n");
+		fgets(carro.modelo, 15, stdin);
+		
+		printf("Digite a cor:\n");
+		fgets(carro.cor, 15, stdin);
+
+		carro.status = 1;
+
+		fseek(arq, 0, SEEK_END);
+		fwrite(&carro, sizeof(CARRO), 1, arq);
+		int posicion = ftell(arq);
+
+		inserirTabelaHash(tabelaHashing, carro.placa,posicion);
+		printf("Cadastro realizado com sucesso!\n");
+	}
 }
 
 void consultar(FILE* arq, No* tabelaHashing[]) {
