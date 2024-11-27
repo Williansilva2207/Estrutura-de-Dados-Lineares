@@ -81,13 +81,7 @@ FILE* prepararArquivo(char nome[]) {
 }
 
 void liberarArquivo(FILE* arq) {
-	/* Apagar, fisicamente, os registros que foram deletados logicamente e fechar o arquivo.
-	*      1.1 - Criar um arquivo novo (vazio).
-	*      1.2 - Copiar todos os registros de STATUS igual a 1 do arquivo de carros para o arquivo novo.
-	*      1.3 - Fechar os dois arquivos.
-	*      1.4 - Remover o arquivo de carros ("carros.dat").
-	*      1.5 - Renomear o arquivo novo com o nome "carros.dat".
-	*/
+	
 	FILE* novo = prepararArquivo("temp.dat");
 	if(arq == NULL){
 		printf("Não é possível abrir o arquivo.\n");
@@ -121,7 +115,17 @@ void criarIndice(FILE* arq, No* tabelaHashing[]) {
 			tabelaHashing[i] = NULL;
 		}
 	}else{
-
+		CARRO carro;
+		int posicao = 0;
+		rewind(arq);
+ 
+    	while (fread(&carro, sizeof(CARRO), 1, arq) == 1) {
+    		if (carro.status == 1) {
+           		
+            	inserirTabelaHash(tabelaHashing, carro.placa, posicao);
+        	}
+        	posicao++;
+    	}
 	}
 	
 }
@@ -260,7 +264,7 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 
 		fseek(arq, 0, SEEK_END);
 		fwrite(&carro, sizeof(CARRO), 1, arq);
-		int posicion = ftell(arq);
+		int posicion = ftell(arq)/sizeof(CARRO);
 
 		inserirTabelaHash(tabelaHashing, carro.placa,posicion);
 		printf("Cadastro realizado com sucesso!\n");
