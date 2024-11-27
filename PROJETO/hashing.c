@@ -233,6 +233,24 @@ void consultar(FILE* arq, No* tabelaHashing[]) {
                   * 4 - Caso encontre, vai ao arquivo, na posição indicada, 
 	 *     lê o registro do carro e exibe seus dados.
                   */
+	char placa[8];
+	printf("Informe a placa do carro:\n");
+	fgets(placa, 15, stdin);
+	int busca = buscar(tabelaHashing, placa);
+	if(busca == -1){
+		printf("Carro não está no cadastro.\n");
+	}else{
+		CARRO carro;
+		fseek(arq, busca, SEEK_SET);
+		fread(&carro, sizeof(CARRO),1,arq);
+		printf("Placa:%s\n", carro.placa);
+		printf("Modelo:%s\n", carro.modelo);
+		printf("Marca:%s\n", carro.marca);
+		printf("Cor:%s\n", carro.cor);
+		printf("Satatus:%d\n", carro.status);
+
+	}
+
 }
 
 void alterar(FILE* arq, No* tabelaHashing[]) {
