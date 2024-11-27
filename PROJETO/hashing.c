@@ -275,11 +275,11 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 		CARRO carro;
 		fseek(arq, busca, SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
-		printf("Placa: %s |\t", carro.placa); 
+		
 		printf("Modelo: %s |\t", carro.modelo); 
 		printf("Marca: %s |\t", carro.marca); 
 		printf("Cor: %s |\t", carro.cor); 
-		printf("Status: %d\n", carro.status); 
+		
 		int op;
 		do{
 			printf("Quais dados pretende alterar:\n");
@@ -287,7 +287,7 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 			printf("Modelo (digite 1) \n"); 
 			printf("Marca (digite 2) \n"); 
 			printf("Cor (digite 3) \n"); 
-			printf("Status (digite 4)\n"); 
+			
 			printf("SAIR (digite 0)");
 			scanf("%d", &op);
 			switch(op){
@@ -301,9 +301,7 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 				case 3:
 					alterarCor(carro.cor);
 					break;
-				case 4:
-					alterarStatus(carro.status);
-					break;
+				
 				default:
 					printf("Essa opção não é possível.\n");
 					break;
