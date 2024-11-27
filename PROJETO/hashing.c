@@ -187,6 +187,30 @@ void removerTabelaHash(No* tabelaHashing[], char placa[], int posTabela) {
 	/* Remover da tabela de hashing o nó que contem a placa passada como parâmetro. 
 	* Recebe como parâmetro também a posição na tabela onde a chave se encontra.
 	*/
+	int indice = hashing(placa);
+	No* aux = tabelaHashing[indice];
+	if(strcmp(aux->placa, placa) == 0){
+		free(aux);
+	}else{
+		No* aux = tabelaHashing[indice]->prox;
+		No* anterior = tabelaHashing[indice];
+		while(1){
+			if(strcmp(aux->placa, placa) == 0 && aux->prox != NULL){
+				anterior->prox = aux->prox;
+				aux->prox->ant = anterior;
+				free(aux);
+				return;
+			}else if(strcmp(aux->placa, placa)== 0 && aux->prox == NULL){
+				anterior->prox = NULL;
+				free(aux);
+				return;
+			}else{
+				anterior = aux;
+				aux = aux->prox;
+			}
+				
+		}
+	}
 }
 
 int hashing(char placa[]) {
@@ -343,7 +367,7 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 		scanf("%d", &op);
 		if(op == 1){
 			carro.status = 0;
-
+			removerTabelaHash(tabelaHashing,carro.placa,busca);
 			fwrite(&carro, sizeof(CARRO), 1, arq);
 		}else{
 			printf("Remocao abortada.\n");
