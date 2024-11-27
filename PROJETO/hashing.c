@@ -29,7 +29,10 @@ void criarIndice(FILE* arq, No* tabelaHashing[]);
 void inserirTabelaHash(No* tabelaHashing[], char placa[], int pos);
 int hashing(char placa[]);
 void exibirOpcoes();
-
+void alterarMarca(char str[]);
+void alterarModelo(char str[]);
+void alterarCor(char str[]);
+void alterarStatus(int status);
 int main() {
 	char nomeArq[] = "carros.dat";
 	int op;
@@ -277,7 +280,37 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 		printf("Marca: %s |\t", carro.marca); 
 		printf("Cor: %s |\t", carro.cor); 
 		printf("Status: %d\n", carro.status); 
+		int op;
+		do{
+			printf("Quais dados pretende alterar:\n");
+			
+			printf("Modelo (digite 1) \n"); 
+			printf("Marca (digite 2) \n"); 
+			printf("Cor (digite 3) \n"); 
+			printf("Status (digite 4)\n"); 
+			printf("SAIR (digite 0)");
+			scanf("%d", &op);
+			switch(op){
 
+				case 1:
+					alterarModelo(carro.modelo);
+					break;
+				case 2:
+					alterarMarca(carro.marca);
+					break;
+				case 3:
+					alterarCor(carro.cor);
+					break;
+				case 4:
+					alterarStatus(carro.status);
+					break;
+				default:
+					printf("Essa opção não é possível.\n");
+					break;
+			}
+		}while(op!=0);
+		fwrite(&carro, sizeof(CARRO),1, arq);
+		printf("Informacoes alteradas.\n");
 	}
 }
 
@@ -297,3 +330,23 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 void exibirCadastro(FILE* arq) {
 	/* Exibe todos os registros de carros ATIVOS constantes no arquivo. */
 }
+
+
+void alterarMarca(char str[]){
+	fgets(str, 15, stdin);
+	printf("Marca alterada.\n");
+}
+void alterarModelo(char str[]){
+	fgets(str, 15, stdin);
+	printf("Modelo alterado.\n");
+}
+void alterarCor(char str[]){
+	fgets(str, 15, stdin);
+	printf("Cor alterada.\n");
+}
+void alterarStatus(int status){
+	scanf("%d", &status);
+	printf("Status alterado.\n");
+}
+
+
