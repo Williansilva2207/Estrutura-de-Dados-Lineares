@@ -323,6 +323,32 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 	 * 5 - Remove o nó que contém a chave, juntamente com sua posição no arquivo, 
                           da tabela de hashing. Utilize para isso o procedimento "removerTabelaHash".
 	*/
+	char placa[8];
+	printf("Informe a placa do carro:\n");
+	fgets(placa, 15, stdin);
+	int busca = buscar(tabelaHashing, placa);
+	if(busca == -1){
+		printf("Carro não está no cadastro.\n");
+	}else{
+		int op;
+		CARRO carro;
+		fseek(arq, busca, SEEK_SET);
+		fread(&carro, sizeof(CARRO),1,arq);
+		printf("Placa: %s |\t", carro.placa); 
+		printf("Modelo: %s |\t", carro.modelo); 
+		printf("Marca: %s |\t", carro.marca); 
+		printf("Cor: %s |\t", carro.cor); 
+		printf("Status: %d\n\n", carro.status);
+		printf("Digite 1: Realmente quer remover este carro.\nDigite 2: Abortar remocao.\n");
+		scanf("%d", &op);
+		if(op == 1){
+			carro.status = 0;
+
+			fwrite(&carro, sizeof(CARRO), 1, arq);
+		}else{
+			printf("Remocao abortada.\n");
+		}
+	}
 }
 
 void exibirCadastro(FILE* arq) {
