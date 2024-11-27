@@ -243,11 +243,11 @@ void consultar(FILE* arq, No* tabelaHashing[]) {
 		CARRO carro;
 		fseek(arq, busca, SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
-		printf("Placa:%s\n", carro.placa);
-		printf("Modelo:%s\n", carro.modelo);
-		printf("Marca:%s\n", carro.marca);
-		printf("Cor:%s\n", carro.cor);
-		printf("Satatus:%d\n", carro.status);
+		printf("Placa: %s |\t", carro.placa); 
+		printf("Modelo: %s |\t", carro.modelo); 
+		printf("Marca: %s |\t", carro.marca); 
+		printf("Cor: %s |\t", carro.cor); 
+		printf("Status: %d\n", carro.status); 
 
 	}
 
@@ -262,6 +262,23 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
                          exibe seus dados.
 	 * 5 - Pergunta ao usuário quais dados deseja alterar. Efetiva a alteração dos dados no arquivo.
 	*/
+	char placa[8];
+	printf("Informe a placa do carro a ser alterada:\n");
+	fgets(placa, 15, stdin);
+	int busca = buscar(tabelaHashing, placa);
+	if(busca == -1){
+		printf("Carro não está no cadastro.\n");
+	}else{
+		CARRO carro;
+		fseek(arq, busca, SEEK_SET);
+		fread(&carro, sizeof(CARRO),1,arq);
+		printf("Placa: %s |\t", carro.placa); 
+		printf("Modelo: %s |\t", carro.modelo); 
+		printf("Marca: %s |\t", carro.marca); 
+		printf("Cor: %s |\t", carro.cor); 
+		printf("Status: %d\n", carro.status); 
+
+	}
 }
 
 void remover(FILE* arq, No* tabelaHashing[]) {
