@@ -281,7 +281,7 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 
 		fseek(arq, 0, SEEK_END);
 		fwrite(&carro, sizeof(CARRO), 1, arq);
-		int posicion = ftell(arq);
+		int posicion = ftell(arq)/sizeof(CARRO)-1;
 
 		inserirTabelaHash(tabelaHashing, carro.placa,posicion);
 		printf("Cadastro realizado com sucesso!\n");
@@ -299,7 +299,8 @@ void consultar(FILE* arq, No* tabelaHashing[]) {
 		printf("Carro não está no cadastro.\n");
 	}else{
 		CARRO carro;
-		fseek(arq, busca, SEEK_SET);
+		int posicion = (busca+1) * sizeof(CARRO);
+		fseek(arq, posicion, SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
 		printf("Placa: %s |\t", carro.placa); 
 		printf("Modelo: %s |\t", carro.modelo); 
@@ -322,7 +323,8 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 		printf("Carro não está no cadastro.\n");
 	}else{
 		CARRO carro;
-		fseek(arq, busca, SEEK_SET);
+		int posicion = (busca+1) * sizeof(CARRO);
+		fseek(arq, posicion, SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
 		
 		printf("Modelo: %s |\t", carro.modelo); 
@@ -374,7 +376,8 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 	}else{
 		int op;
 		CARRO carro;
-		fseek(arq, busca, SEEK_SET);
+		int posicion = (busca+1) * sizeof(CARRO);
+		fseek(arq, posicion, SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
 		printf("Placa: %s |\t", carro.placa); 
 		printf("Modelo: %s |\t", carro.modelo); 
