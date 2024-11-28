@@ -72,9 +72,9 @@ int main() {
 }
 
 FILE* prepararArquivo(char nome[]) {
-    FILE* arquivo = fopen(nome, "rb");
+    FILE* arquivo = fopen(nome, "r+b");
     if (arquivo == NULL) {
-        arquivo = fopen(nome, "wb");
+        arquivo = fopen(nome, "w+b");
         if (arquivo == NULL) {
             printf("Erro ao criar ou abrir o arquivo: %s\n", nome);
             return NULL;
