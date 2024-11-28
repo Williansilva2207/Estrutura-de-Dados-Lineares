@@ -35,6 +35,7 @@ void alterarMarca(char str[]);
 void alterarModelo(char str[]);
 void alterarCor(char str[]);
 void alterarStatus(int status);
+void tirarEnter(char str[]);
 int main() {
 	char nomeArq[] = "carros.dat";
 	int op;
@@ -258,20 +259,21 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 	
 	CARRO carro;
 	printf("Digite a placa do carro:\n");
-	fgets(carro.placa, 8, stdin);
+	fgets(carro.placa, sizeof(carro.placa)+1, stdin);
+	tirarEnter(carro.placa);
 	int busca = buscar(tabelaHashing, carro.placa);
 	if(busca != -1){
 		printf("O carro já está cadastrado.\n");
 	}else{
 		printf("Digite a marca:\n");
-		fgets(carro.marca, 15, stdin);
-		
+		fgets(carro.marca, sizeof(carro.marca)+1, stdin);
+		tirarEnter(carro.marca);
 		printf("Digite a modelo:\n");
-		fgets(carro.modelo, 15, stdin);
-		
+		fgets(carro.modelo, sizeof(carro.modelo)+1, stdin);
+		tirarEnter(carro.modelo);
 		printf("Digite a cor:\n");
-		fgets(carro.cor, 15, stdin);
-
+		fgets(carro.cor, sizeof(carro.cor)+1, stdin);
+		tirarEnter(carro.cor);
 		carro.status = 1;
 
 		fseek(arq, 0, SEEK_END);
@@ -287,7 +289,8 @@ void consultar(FILE* arq, No* tabelaHashing[]) {
 
 	char placa[8];
 	printf("Informe a placa do carro:\n");
-	fgets(placa, 15, stdin);
+	fgets(placa, sizeof(placa)+1, stdin);
+	tirarEnter(placa);
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
 		printf("Carro não está no cadastro.\n");
@@ -309,7 +312,8 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 
 	char placa[8];
 	printf("Informe a placa do carro a ser alterada:\n");
-	fgets(placa, 15, stdin);
+	fgets(placa, sizeof(placa)+1, stdin);
+	tirarEnter(placa);
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
 		printf("Carro não está no cadastro.\n");
@@ -324,14 +328,15 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 		
 		int op;
 		do{
-			printf("Quais dados pretende alterar:\n");
+			printf("\nQuais dados pretende alterar:\n");
 			
 			printf("Modelo (digite 1) \n"); 
 			printf("Marca (digite 2) \n"); 
 			printf("Cor (digite 3) \n"); 
 			
-			printf("SAIR (digite 0)");
+			printf("SAIR (digite 0)\n");
 			scanf("%d", &op);
+			getchar();
 			switch(op){
 
 				case 1:
@@ -358,7 +363,8 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 
 	char placa[8];
 	printf("Informe a placa do carro:\n");
-	fgets(placa, 15, stdin);
+	fgets(placa, sizeof(placa)+1, stdin);
+	tirarEnter(placa);
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
 		printf("Carro não está no cadastro.\n");
@@ -374,6 +380,7 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 		printf("Status: %d\n\n", carro.status);
 		printf("Digite 1: Realmente quer remover este carro.\nDigite 2: Abortar remocao.\n");
 		scanf("%d", &op);
+		getchar();
 		if(op == 1){
 			carro.status = 0;
 			removerTabelaHash(tabelaHashing,carro.placa,busca);
@@ -407,20 +414,29 @@ void exibirCadastro(FILE* arq) {
 
 
 void alterarMarca(char str[]){
-	fgets(str, 15, stdin);
+	fgets(str, sizeof(str)+1, stdin);
+	tirarEnter(str);
 	printf("Marca alterada.\n");
 }
 void alterarModelo(char str[]){
-	fgets(str, 15, stdin);
+	fgets(str, sizeof(str)+1, stdin);
+	tirarEnter(str);
 	printf("Modelo alterado.\n");
 }
 void alterarCor(char str[]){
-	fgets(str, 15, stdin);
+	fgets(str, sizeof(str)+1, stdin);
+	tirarEnter(str);
 	printf("Cor alterada.\n");
 }
 void alterarStatus(int status){
 	scanf("%d", &status);
+	
 	printf("Status alterado.\n");
 }
 
-
+void tirarEnter(char str[]){
+	int indice = strlen(str);
+	if(str[indice] == '\n'){
+		str[indice] = '\0';
+	}
+}
