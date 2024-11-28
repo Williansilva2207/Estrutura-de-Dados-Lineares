@@ -249,7 +249,7 @@ int hashing(char placa[]) {
 	
 	int i, soma = 0, tam = strlen(placa);
 	for (i = 0; i < tam; i++) {
-		soma = soma + placa[i] << (i % 8);
+		soma = soma + placa[i];
 	}
 	return abs(soma) % N;
 }
@@ -259,7 +259,7 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 	
 	CARRO carro;
 	printf("Digite a placa do carro:\n");
-	fgets(carro.placa, sizeof(carro.placa)+1, stdin);
+	fgets(carro.placa, sizeof(carro.placa)+10, stdin);
 	tirarEnter(carro.placa);
 	int busca = buscar(tabelaHashing, carro.placa);
 	if(busca != -1){
@@ -434,9 +434,10 @@ void alterarStatus(int status){
 	printf("Status alterado.\n");
 }
 
-void tirarEnter(char str[]){
-	int indice = strlen(str);
-	if(str[indice] == '\n'){
-		str[indice] = '\0';
-	}
+void tirarEnter(char str[]) {
+    int len = strlen(str);
+    if (len > 0 && str[len - 1] == '\n') {
+        str[len - 1] = '\0';
+    }
 }
+
