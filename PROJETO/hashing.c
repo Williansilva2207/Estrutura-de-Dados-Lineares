@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define N 57
 typedef struct carro {
-	char placa[10];
+	char placa[8];
 	char marca[15];
 	char modelo[15];
 	char cor[15];
@@ -259,8 +259,9 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 	
 	CARRO carro;
 	printf("Digite a placa do carro:\n");
-	fgets(carro.placa, sizeof(carro.placa), stdin);
-	carro.placa[strcspn(carro.placa, "\n")] = '\0';
+	scanf("%s", carro.placa);
+	getchar();
+	
 	//tirarEnter(carro.placa);
 	int busca = buscar(tabelaHashing, carro.placa);
 	if(busca != -1){
@@ -268,14 +269,14 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 	}else{
 	    
 		printf("Digite a marca:\n");
-		fgets(carro.marca, sizeof(carro.marca), stdin);
-		tirarEnter(carro.marca);
+		scanf("%s", carro.marca);
+		getchar();
 		printf("Digite a modelo:\n");
-		fgets(carro.modelo, sizeof(carro.modelo), stdin);
-		tirarEnter(carro.modelo);
+		scanf("%s", carro.modelo);
+		getchar();
 		printf("Digite a cor:\n");
-		fgets(carro.cor, sizeof(carro.cor), stdin);
-		tirarEnter(carro.cor);
+		scanf("%s", carro.cor);
+		getchar();
 		carro.status = 1;
 
 		fseek(arq, 0, SEEK_END);
@@ -289,10 +290,10 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 
 void consultar(FILE* arq, No* tabelaHashing[]) {
 
-	char placa[10];
+	char placa[8];
 	printf("Informe a placa do carro:\n");
-	fgets(placa, sizeof(placa), stdin);
-	tirarEnter(placa);
+	scanf("%s", placa);
+	getchar();
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
 		printf("Carro não está no cadastro.\n");
@@ -314,8 +315,8 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 
 	char placa[8];
 	printf("Informe a placa do carro a ser alterada:\n");
-	fgets(placa, sizeof(placa), stdin);
-	tirarEnter(placa);
+	scanf("%s", placa);
+	getchar();
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
 		printf("Carro não está no cadastro.\n");
@@ -416,18 +417,18 @@ void exibirCadastro(FILE* arq) {
 
 
 void alterarMarca(char str[]){
-	fgets(str, sizeof(str)+1, stdin);
-	tirarEnter(str);
+	scanf("%s", str);
+	getchar();
 	printf("Marca alterada.\n");
 }
 void alterarModelo(char str[]){
-	fgets(str, sizeof(str)+1, stdin);
-	tirarEnter(str);
+	scanf("%s", str);
+	getchar();
 	printf("Modelo alterado.\n");
 }
 void alterarCor(char str[]){
-	fgets(str, sizeof(str)+1, stdin);
-	tirarEnter(str);
+	scanf("%s", str);
+	getchar();
 	printf("Cor alterada.\n");
 }
 void alterarStatus(int status){
