@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define N 57
 typedef struct carro {
-	char placa[8];
+	char placa[10];
 	char marca[15];
 	char modelo[15];
 	char cor[15];
@@ -192,8 +192,8 @@ void inserirTabelaHash(No* tabelaHashing[], char placa[], int pos) {
 		novo->ant = NULL;
 		tabelaHashing[indiceHash] = novo;
 	}else{
-		No* atual = tabelaHashing[indiceHash]->prox;
-		No* anterior = tabelaHashing[indiceHash];
+		atual = tabelaHashing[indiceHash]->prox;
+		anterior = tabelaHashing[indiceHash];
 		while(1){
 			if(strcmp(novo->placa, atual->placa) < 0){
 				novo->prox = atual;
@@ -259,26 +259,28 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 	
 	CARRO carro;
 	printf("Digite a placa do carro:\n");
-	fgets(carro.placa, sizeof(carro.placa)+10, stdin);
-	tirarEnter(carro.placa);
+	fgets(carro.placa, sizeof(carro.placa), stdin);
+	carro.placa[strcspn(carro.placa, "\n")] = '\0';
+	//tirarEnter(carro.placa);
 	int busca = buscar(tabelaHashing, carro.placa);
 	if(busca != -1){
 		printf("O carro já está cadastrado.\n");
 	}else{
+	    
 		printf("Digite a marca:\n");
-		fgets(carro.marca, sizeof(carro.marca)+1, stdin);
+		fgets(carro.marca, sizeof(carro.marca), stdin);
 		tirarEnter(carro.marca);
 		printf("Digite a modelo:\n");
-		fgets(carro.modelo, sizeof(carro.modelo)+1, stdin);
+		fgets(carro.modelo, sizeof(carro.modelo), stdin);
 		tirarEnter(carro.modelo);
 		printf("Digite a cor:\n");
-		fgets(carro.cor, sizeof(carro.cor)+1, stdin);
+		fgets(carro.cor, sizeof(carro.cor), stdin);
 		tirarEnter(carro.cor);
 		carro.status = 1;
 
 		fseek(arq, 0, SEEK_END);
 		fwrite(&carro, sizeof(CARRO), 1, arq);
-		int posicion = ftell(arq)/sizeof(CARRO);
+		int posicion = ftell(arq);
 
 		inserirTabelaHash(tabelaHashing, carro.placa,posicion);
 		printf("Cadastro realizado com sucesso!\n");
@@ -287,9 +289,9 @@ void cadastrar(FILE* arq, No* tabelaHashing[]) {
 
 void consultar(FILE* arq, No* tabelaHashing[]) {
 
-	char placa[8];
+	char placa[10];
 	printf("Informe a placa do carro:\n");
-	fgets(placa, sizeof(placa)+1, stdin);
+	fgets(placa, sizeof(placa), stdin);
 	tirarEnter(placa);
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
@@ -312,7 +314,7 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 
 	char placa[8];
 	printf("Informe a placa do carro a ser alterada:\n");
-	fgets(placa, sizeof(placa)+1, stdin);
+	fgets(placa, sizeof(placa), stdin);
 	tirarEnter(placa);
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
