@@ -28,6 +28,8 @@ void exibirCadastro(FILE* arq);
 void criarIndice(FILE* arq, No* tabelaHashing[]);
 void inserirTabelaHash(No* tabelaHashing[], char placa[], int pos);
 int hashing(char placa[]);
+void liberarArquivo(FILE* arq);
+void desalocarIndice(No* tabelaHashing[]);
 void exibirOpcoes();
 void alterarMarca(char str[]);
 void alterarModelo(char str[]);
@@ -45,7 +47,8 @@ int main() {
 		criarIndice(cadastro, tabelaHashing);
 		do {
 			exibirOpcoes();
-			scanf("%d",&op); fflush(stdin);
+			scanf("%d",&op); 
+			getchar();
 			switch (op) {
 			case 1: cadastrar(cadastro, tabelaHashing);
 		                              break;
