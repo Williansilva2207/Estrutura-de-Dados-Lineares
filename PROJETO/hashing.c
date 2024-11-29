@@ -34,8 +34,7 @@ void exibirOpcoes();
 void alterarMarca(char str[]);
 void alterarModelo(char str[]);
 void alterarCor(char str[]);
-void alterarStatus(int status);
-void tirarEnter(char str[]);
+
 int main() {
 	char nomeArq[] = "carros.dat";
 	int op;
@@ -435,16 +434,6 @@ void alterarCor(char str[]){
 	getchar();
 	printf("Cor alterada.\n");
 }
-void alterarStatus(int status){
-	scanf("%d", &status);
-	
-	printf("Status alterado.\n");
-}
 
-void tirarEnter(char str[]) {
-    int len = strlen(str);
-    if (len > 0 && str[len - 1] == '\n') {
-        str[len - 1] = '\0';
-    }
-}
+
 
