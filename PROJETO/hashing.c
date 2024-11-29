@@ -299,8 +299,8 @@ void consultar(FILE* arq, No* tabelaHashing[]) {
 		printf("Carro não está no cadastro.\n");
 	}else{
 		CARRO carro;
-		int posicion = (busca+1) * sizeof(CARRO);
-		fseek(arq, posicion, SEEK_SET);
+		
+		fseek(arq, busca*sizeof(CARRO), SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
 		printf("Placa: %s |\t", carro.placa); 
 		printf("Modelo: %s |\t", carro.modelo); 
@@ -323,8 +323,8 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 		printf("Carro não está no cadastro.\n");
 	}else{
 		CARRO carro;
-		int posicion = (busca+1) * sizeof(CARRO);
-		fseek(arq, posicion, SEEK_SET);
+		
+		fseek(arq, busca*sizeof(CARRO), SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
 		
 		printf("Modelo: %s |\t", carro.modelo); 
@@ -359,6 +359,7 @@ void alterar(FILE* arq, No* tabelaHashing[]) {
 					break;
 			}
 		}while(op!=0);
+		fseek(arq, busca*sizeof(CARRO), SEEK_SET);
 		fwrite(&carro, sizeof(CARRO),1, arq);
 		printf("Informacoes alteradas.\n");
 	}
@@ -368,16 +369,15 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 
 	char placa[8];
 	printf("Informe a placa do carro:\n");
-	fgets(placa, sizeof(placa)+1, stdin);
-	tirarEnter(placa);
+	scanf("%s", placa);
 	int busca = buscar(tabelaHashing, placa);
 	if(busca == -1){
 		printf("Carro não está no cadastro.\n");
 	}else{
 		int op;
 		CARRO carro;
-		int posicion = (busca+1) * sizeof(CARRO);
-		fseek(arq, posicion, SEEK_SET);
+		
+		fseek(arq, busca*sizeof(CARRO), SEEK_SET);
 		fread(&carro, sizeof(CARRO),1,arq);
 		printf("Placa: %s |\t", carro.placa); 
 		printf("Modelo: %s |\t", carro.modelo); 
@@ -390,6 +390,7 @@ void remover(FILE* arq, No* tabelaHashing[]) {
 		if(op == 1){
 			carro.status = 0;
 			removerTabelaHash(tabelaHashing,carro.placa,busca);
+			fseek(arq, busca*sizeof(CARRO), SEEK_SET);
 			fwrite(&carro, sizeof(CARRO), 1, arq);
 		}else{
 			printf("Remocao abortada.\n");
